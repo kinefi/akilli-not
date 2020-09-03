@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.note {
+  border: 1px solid #ffe935;
+  min-width: 100px;
+  min-height: 100px;
+  background: #fffbda;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 15px;
+  float: left;
+  box-shadow: 5px 5px 3px #dfc700;
+  touch-action: none;
+  user-select: none;
+}
+
+.notes {
+  touch-action: none;
+  user-select: none;
+  color: #121a7c;
+  width: 97.5vw;
+  height: 95vh;
+  margin: 0.5vw;
+  border: 1px solid #ffe935;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noteField {
+  width: 100%;
+  height: 90%;
+}
