@@ -1,40 +1,25 @@
 {
   "name": "akilli-not",
-  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2",
-    "@fortawesome/free-solid-svg-icons": "^5.14",
-    "@fortawesome/react-fontawesome": "^0.1",
-    "@testing-library/jest-dom": "^4.2",
-    "@testing-library/react": "^9.3",
-    "@testing-library/user-event": "^7.1",
-    "interactjs": "^1.9",
-    "react": "^16.13",
-    "react-dom": "^16.13",
-    "react-modal": "^3.11",
-    "react-scripts": "3.4",
-    "react-tabs": "^3.1"
-  },
+  "version": "0.2.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
+    "interactjs": "^1.10.28",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-modal": "^3.16.3",
+    "react-tabs": "^6.1.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
+    "vite": "^7.3.8"
   }
 }

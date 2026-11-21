@@ -1,60 +1,84 @@
 import interact from "interactjs";
 
-const enableDrag = () => {
-  interact(".note").draggable({
-    inertia: true,
-    autoScroll: true,
-    modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: "parent",
-        endOnly: true,
-      }),
-    ],
-    listeners: {
-      move: (event) => {
-        const target = event.target;
-        // keep the dragged position in the data-x/data-y attributes
-        const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
-        const y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
-        // translate the element
-        target.style.webkitTransform = target.style.transform =
-          "translate(" + x + "px, " + y + "px)";
-        // update the posiion attributes
-        target.setAttribute("data-x", x);
-        target.setAttribute("data-y", y);
-      },
-    },
-  });
-};
-
-const enableResize = (
-  element,
-  edges = { left: true, right: true, bottom: true, top: true },
-  wrapper = "parent"
+export const setupNoteInteractions = (
+  selector = ".note",
+  { onMoveEnd, onResizeEnd } = {}
 ) => {
-  if (element) {
-    interact(element)
-      .resizable({
-        inertia: true,
-        edges: edges,
-        modifiers: [
-          interact.modifiers.restrictEdges({
-            outer: wrapper,
-            endOnly: true,
-          }),
-          interact.modifiers.restrictSize({
-            min: { width: 300, height: 300 },
-          }),
-        ],
-      })
-      .on("resizemove", (e) => {
-        element.style.width = `${e.rect.width}px`;
-        element.style.height = `${e.rect.height}px`;
-      });
-  }
+  interact(selector).unset();
+
+  interact(selector)
+    .draggable({
+      inertia: true,
+      autoScroll: true,
+      ignoreFrom: "button, textarea, input",
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: "parent",
+          endOnly: true,
+        }),
+      ],
+      listeners: {
+        move(event) {
+          const target = event.target;
+          const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+          const y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+          target.style.transform = `translate(${x}px, ${y}px)`;
+          target.setAttribute("data-x", String(x));
+          target.setAttribute("data-y", String(y));
+        },
+        end(event) {
+          const target = event.target;
+          const id = target.getAttribute("data-id");
+          const x = parseFloat(target.getAttribute("data-x")) || 0;
+          const y = parseFloat(target.getAttribute("data-y")) || 0;
+          if (id && onMoveEnd) {
+            onMoveEnd(id, { x, y });
+          }
+        },
+      },
+    })
+    .resizable({
+      inertia: true,
+      edges: { left: false, right: true, bottom: true, top: false },
+      modifiers: [
+        interact.modifiers.restrictEdges({
+          outer: "parent",
+          endOnly: true,
+        }),
+        interact.modifiers.restrictSize({
+          min: { width: 140, height: 120 },
+        }),
+      ],
+      listeners: {
+        move(event) {
+          const target = event.target;
+          let x = parseFloat(target.getAttribute("data-x")) || 0;
+          let y = parseFloat(target.getAttribute("data-y")) || 0;
+
+          target.style.width = `${event.rect.width}px`;
+          target.style.height = `${event.rect.height}px`;
+
+          x += event.deltaRect.left;
+          y += event.deltaRect.top;
+
+          target.style.transform = `translate(${x}px, ${y}px)`;
+          target.setAttribute("data-x", String(x));
+          target.setAttribute("data-y", String(y));
+        },
+        end(event) {
+          const target = event.target;
+          const id = target.getAttribute("data-id");
+          const width = event.rect.width;
+          const height = event.rect.height;
+          if (id && onResizeEnd) {
+            onResizeEnd(id, { width, height });
+          }
+        },
+      },
+    });
 };
 
 export default {
-  enableDrag,
-  enableResize,
+  setupNoteInteractions,
 };
