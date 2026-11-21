@@ -1,5 +1,8 @@
 # Akıllı Not
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![GitHub Pages Deploy](https://github.com/kinefi/solsoyagaci/actions/workflows/deploy.yml/badge.svg)](https://kinefi.github.io/akilli-not/)
+
 Sekmeli yapıda çalışan, sürüklenebilir ve boyutlandırılabilir not kartları sunan React uygulaması.
 
 ## Özellikler
@@ -76,3 +79,7 @@ Alternatif olarak `package.json` dosyasına şu alanı ekleyip `pnpm install` ç
   }
 }
 ```
+
+## Lisans
+
+Bu proje [Apache License 2.0](./LICENSE) altında lisanslanmıştır.
